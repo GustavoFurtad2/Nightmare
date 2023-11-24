@@ -1,5 +1,5 @@
 /*
- Project Beta a game for Athena Discord Server Game jam
+ Cosmos a game for Athena Discord Server Game jam
  By Gustavo Furtado
 */
 
