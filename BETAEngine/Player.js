@@ -1,84 +1,28 @@
-var PI = Math.PI;
+let WIDTH = 640;
+let HEIGHT = 448;
 
-function lshift(x, y) {
-    return Math.floor(x * 2 ^ y)
-}
-
-function rshift(x, y) {
-    return Math.floor(x / 2 ^ y)
-}
-
-var font = new Font();
-
-let mapW = 0;
-let mapH = 0;
-let mapS = 0;
-let map = []
-font.Color = Color.new(255, 0, 0)
-export function mapSet(width, height, newMap) {
-    mapW = width;
-    mapH = height;
-    mapS = mapW * mapH;
-    map = newMap;
-}
 export class Player {
-   x = 200;
-   y = 400;
-   deltaX = 0;
-   deltaY = 0;
-   angle = 0;
+  x = WIDTH / 2;
+  y = HEIGHT / 2;
+  speed = 5;
+  fov = Math.PI / 4;
+  angle = Math.PI / 2;
 
-   DrawPlayer() {
-    Draw.point(this.x, this.y, Color.new(255, 255, 0));
-
-    Draw.line(this.x, this.y, this.x + this.deltaX * 10, this.y + this.deltaY * 10, Color.new(255, 255, 0));
-
-    this.DrawRays3d();
-    }
-
-    DrawRays3d() {
-
-    }
-
-   TurnLeft(connect) {
+  TurnLeft() {
     this.angle -= 0.1;
-     if (this.angle < 0) {
-       this.angle += 2 * PI;
-     }
-    this.deltaX = Math.cos(this.angle) * 5;
-    this.deltaY = Math.sin(this.angle) * 5;
+  }
 
-     if (typeof connect != "undefined") {
-        connect();
-     }
-   }
-
-   TurnRight(connect) {
+  TurnRight() {
     this.angle += 0.1;
-    if (this.angle > 2 * PI) {
-      this.angle -= 2 * PI;
-    }
-    this.deltaX = Math.cos(this.angle) * 5;
-    this.deltaY = Math.sin(this.angle) * 5;
-    
-    if (typeof connect != "undefined") {
-       connect();
-    }
   }
 
-  WalkFront(connect) {
-    this.x += this.deltaX;
-    this.y += this.deltaY;
-    if (typeof connect != "undefined") {
-        connect();
-     }
+  WalkFront() {
+    this.x += this.speed * Math.cos(this.angle);
+    this.y += this.speed * Math.sin(this.angle);
   }
 
-  WalkBack(connect) {
-    this.x -= this.deltaX;
-    this.y -= this.deltaY;
-    if (typeof connect != "undefined") {
-        connect();
-     }
+  WalkBack() {
+    this.x -= this.speed * Math.cos(this.angle);
+    this.y -= this.speed * Math.sin(this.angle);   
   }
 }
