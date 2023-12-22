@@ -14,6 +14,8 @@ export function SetMap(size, newmap) {
   MAP = newmap;
 }
 
+var FOV = Player.FOV;
+
 function castRay(angle) {
     var x = Player.x;
     var y = Player.y;
@@ -24,7 +26,7 @@ function castRay(angle) {
         var mapX = Math.floor(x / (WIDTH / MAP_SIZE));
         var mapY = Math.floor(y / (HEIGHT / MAP_SIZE));
 
-        if (map[mapY][mapX] === 1) {
+        if (MAP[mapY][mapX] === 1) {
             var distance = Math.sqrt((x - Player.x) ** 2 + (y - Player.y) ** 2);
             var wallHeight = WALL_HEIGHT / distance * Math.cos(angle - Player.angle);
             return {
@@ -52,6 +54,6 @@ export function render() {
         var lineHeight = (WALL_HEIGHT * HEIGHT) / (distance * Math.cos(rayAngle - Player.angle));
         var wallTop = (HEIGHT - lineHeight) / 2;
 
-        Draw.rect(coll, wallTop, 1, lineHeight, hitWall ? Color.new(40, 40, 40) : Color.new(0, 0, 0));
+        Draw.rect(col, wallTop, 1, lineHeight, hitWall ? Color.new(40, 40, 40) : Color.new(0, 0, 0));
     }
 }
