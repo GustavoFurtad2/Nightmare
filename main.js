@@ -1,4 +1,4 @@
-import { Player } from "./BETAEngine/BETAEngine.js";
+import { Player, render} from "./BETAEngine/BETAEngine.js";
 import { Map } from "./BETAEngine/Map.js";
 var Mapa = new Map(8, new Array(
     [1, 1, 1, 1, 1, 1, 1, 1],
@@ -28,6 +28,6 @@ function MovePlayer() {
 }
 while (true) {
     Screen.clear();
-
+    render();
     Screen.flip();
 }
