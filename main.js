@@ -1,22 +1,33 @@
-/*
- Cosmos a game for Athena Discord Server Game jam
- By Gustavo Furtado
-*/
+import { Player } from "./BETAEngine/BETAEngine.js";
+import { Map } from "./BETAEngine/Map.js";
+var Mapa = new Map(8, new Array(
+    [1, 1, 1, 1, 1, 1, 1, 1],
+    [0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 1, 0, 0, 0, 1, 0, 0],
+    [0, 1, 0, 0, 0, 1, 1, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0],
+    [1, 1, 1, 1, 1, 1, 1, 1]
+));
 
-import * as map from "./map.js"; map.Update;
-
-let font = new Font();
-font.size = 0.75;
-
-const canvas = Screen.getMode();
-canvas.mode = DTV_480p;
-Screen.setMode(canvas);
-
+function MovePlayer() {
+  var Pad = Pads.get();
+  if (Pad.ly < -25) {
+    Player.WalkFront();
+  }
+  if (Pad.ly > 25) {
+    Player.WalkBack();
+  }
+  if (Pad.rx < -25) {
+    Player.TurnLeft();
+  }
+  if (Pad.rx > 25) {
+    Player.TurnRight();
+  }
+}
 while (true) {
-  Screen.clear();
+    Screen.clear();
 
-  map.Update();
-  var freeVram = Screen.getFreeVRAM();
-  font.print(330, 10, "Freevram: " + freeVram + " kb");
-  Screen.flip();
+    Screen.flip();
 }
