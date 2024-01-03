@@ -1,22 +1,17 @@
-import { Player, render} from "./BETAEngine/BETAEngine.js";
-import { Map } from "./BETAEngine/Map.js";
-var Mapa = new Map(8, new Array(
-    [1, 1, 1, 1, 1, 1, 1, 1],
-    [0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 1, 0, 0, 0, 1, 0, 0],
-    [0, 1, 0, 0, 0, 1, 1, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0],
-    [1, 1, 1, 1, 1, 1, 1, 1]
-));
+import {Player} from "./NightmareEngine/Player.js";
+import {Map} from "./NightmareEngine/Map.js";
+import {Engine} from "./NightmareEngine/BETAEngine.js";
 
-function MovePlayer() {
+let Player = new Player();
+let Map = new Map();
+let Engine = new Engine();
+
+function Move() {
   var Pad = Pads.get();
-  if (Pad.ly < -25) {
+  if (Pad.lx < - 25) {
     Player.WalkFront();
   }
-  if (Pad.ly > 25) {
+  if (Pad.lx > 25) {
     Player.WalkBack();
   }
   if (Pad.rx < -25) {
@@ -25,9 +20,15 @@ function MovePlayer() {
   if (Pad.rx > 25) {
     Player.TurnRight();
   }
+  Engine.Move(Player);
 }
+Screen.setFrameCounter(true);
+
+var font = new Font();
 while (true) {
-    Screen.clear();
-    render();
-    Screen.flip();
+  Screen.clear();
+  var fps = Screen.getFPS(16);
+  font.print(10, 10, fps);
+  Engine.Draw(Player);
+  Screen.flip();
 }
