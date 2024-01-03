@@ -1,6 +1,6 @@
 import {Player} from "./NightmareEngine/Player.js";
 import {Map} from "./NightmareEngine/Map.js";
-import {Engine} from "./NightmareEngine/BETAEngine.js";
+import {Engine} from "./NightmareEngine/NightmareEngine.js";
 
 let Player = new Player();
 let Map = new Map();
